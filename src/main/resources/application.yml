@@ -11,3 +11,10 @@ spring:
 
 server:
   port: 4444
+
+size-measures:
+  extra-small: xs
+  small: s
+  medium: m
+  large: l
+  extra-large: xl
