@@ -18,11 +18,11 @@ import org.springframework.validation.annotation.Validated;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ConfigurationProperties(prefix = "size-measures")
 public class TShirtSizeProperties {
-    char extraSmall;
-    char small;
-    char medium;
-    char large;
-    char extraLarge;
+    String extraSmall;
+    String small;
+    String medium;
+    String large;
+    String extraLarge;
 
     @Bean
     public TShirtSizeProperties setTShirtSizeProperties(TShirtSizeProperties properties){
