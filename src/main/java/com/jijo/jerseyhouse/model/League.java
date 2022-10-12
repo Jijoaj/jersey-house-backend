@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @Getter
 public class League {
     @Id
-    private int leagueCode;
+    private Integer leagueCode;
     @Column(nullable = false, unique = true, length = 15)
     private String leagueName;
 }
