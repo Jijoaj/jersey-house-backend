@@ -1,0 +1,1 @@
+INSERT INTO COUNTRY (country_code, country_name) VALUES(1, 'SAMPLE_COUNTRY');
