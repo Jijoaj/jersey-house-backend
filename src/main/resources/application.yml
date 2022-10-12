@@ -5,6 +5,9 @@ spring:
     url: jdbc:h2:mem:testdb
     password: test
 
+  h2:
+    console.path: /h2
+
   devtools:
     restart:
       enabled: true
