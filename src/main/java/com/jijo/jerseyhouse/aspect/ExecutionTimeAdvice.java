@@ -14,11 +14,12 @@ import org.springframework.stereotype.Component;
 public class ExecutionTimeAdvice {
 
     @Around("@annotation(com.jijo.jerseyhouse.aspect.TrackExecutionTime)")
-    public void executionTime(ProceedingJoinPoint point) throws Throwable {
+    public Object executionTime(ProceedingJoinPoint point) throws Throwable {
         long startTime = System.currentTimeMillis();
-        point.proceed();
+        Object proceed = point.proceed();
         long endTime = System.currentTimeMillis();
         log.info("Class name : {} , Method name : {} , Time taken for execution : {} ms",
-                point.getSignature().getDeclaringType(), point.getSignature().getName(), startTime-endTime);
+                point.getSignature().getDeclaringType(), point.getSignature().getName(), endTime-startTime);
+        return proceed;
     }
 }
