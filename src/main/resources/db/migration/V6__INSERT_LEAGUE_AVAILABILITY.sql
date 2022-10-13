@@ -1,0 +1,17 @@
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (1, 1, 1);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (2, 1, 2);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (3, 1, 3);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (4, 1, 4);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (5, 1, 5);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (6, 1, 6);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (7, 2, 1);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (8, 2, 2);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (9, 2, 3);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (10, 2, 4);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (11, 2, 5);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (12, 3, 2);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (13, 4, 5);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (14, 4, 1);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (15, 5, 1);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (16, 5, 4);
+INSERT INTO  league_availability  (id,country_code, LEAGUE_CODE) VALUES  (17, 5, 6);
