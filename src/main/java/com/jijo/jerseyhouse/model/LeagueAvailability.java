@@ -14,5 +14,5 @@ public class LeagueAvailability {
     @Column(nullable = false)
     private int leagueCode;
     @Column(nullable = false)
-    private int CountryCode;
+    private int countryCode;
 }
