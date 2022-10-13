@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface LeagueAvailabilityRepository extends JpaRepository<LeagueAvailability, Integer> {
 
+    /* Query to find the available leagues in the specified country */
     @Query("Select l from LeagueAvailability la " +
             "join League l on l.leagueCode = la.leagueCode " +
             "join Country c on c.countryCode = la.countryCode " +
