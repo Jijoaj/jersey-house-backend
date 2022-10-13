@@ -1,5 +1,6 @@
 package com.jijo.jerseyhouse.service.impl;
 
+import com.jijo.jerseyhouse.aspect.TrackExecutionTime;
 import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
 import com.jijo.jerseyhouse.repository.CountryRepository;
@@ -25,6 +26,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      * @return list of Country
      */
     @Override
+    @TrackExecutionTime
     public List<Country> getCountryList() {
         return countryRepository.findAllByOrderByCountryName();
     }
@@ -36,6 +38,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      * @return List of Country that is available in the country
      */
     @Override
+    @TrackExecutionTime
     public List<League> getLeagueByCountry(String country) {
         return leagueAvailabilityRepository.getLeagueAvailableForCountry(country);
     }
