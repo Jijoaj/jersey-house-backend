@@ -32,7 +32,7 @@ public class MainController implements MainControllerInterface {
     }
 
     /**
-     * @param country
+     * @param country country
      * @return list of league available in the country
      */
     @Override
