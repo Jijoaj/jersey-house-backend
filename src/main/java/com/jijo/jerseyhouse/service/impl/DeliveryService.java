@@ -36,7 +36,7 @@ public class DeliveryService implements DeliveryServiceInterface {
     /**
      * method getLeagueByCountry
      *
-     * @param country
+     * @param country country
      * @return List of Country that is available in the country
      */
     @Override
