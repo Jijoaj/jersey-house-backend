@@ -6,12 +6,14 @@ import com.jijo.jerseyhouse.model.League;
 import com.jijo.jerseyhouse.repository.CountryRepository;
 import com.jijo.jerseyhouse.repository.LeagueAvailabilityRepository;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class DeliveryService implements DeliveryServiceInterface {
 
     @Autowired
@@ -40,6 +42,7 @@ public class DeliveryService implements DeliveryServiceInterface {
     @Override
     @TrackExecutionTime
     public List<League> getLeagueByCountry(String country) {
+        log.info("getCountryList :: fetching available leagues for country : " + country);
         return leagueAvailabilityRepository.getLeagueAvailableForCountry(country);
     }
 }
