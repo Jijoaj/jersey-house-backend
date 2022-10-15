@@ -49,4 +49,17 @@ public class MainControllerTest {
         countryList.add(testCountry);
         return  countryList;
     }
+
+    @Test
+    @Order(2)
+    @Sql("classpath:/junit_db_scripts/INSERT_TEST_DATA.sql")
+    public void shouldFetchAllLeaguesForCountry() throws Exception {
+        List<Country> countryList = getCountryList();
+        String expectedResult = objectMapper.writeValueAsString(countryList);
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/main/getLeagueByCountry")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .param("country","SAMPLE_COUNTRY"))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
