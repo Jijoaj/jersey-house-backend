@@ -3,6 +3,7 @@ package com.jijo.jerseyhouse.controller.impl;
 import com.jijo.jerseyhouse.controller.MainControllerInterface;
 import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
+import com.jijo.jerseyhouse.model.Season;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,5 +39,14 @@ public class MainController implements MainControllerInterface {
     @Override
     public ResponseEntity<List<League>> getLeagueByCountry(String country) {
         return new ResponseEntity<>(deliveryService.getLeagueByCountry(country),HttpStatus.OK);
+    }
+
+    /**
+     * method getAllSeasons
+     * @return list of seasons
+     */
+    @Override
+    public ResponseEntity<List<Season>> getAllSeasons() {
+        return new ResponseEntity<>(deliveryService.getAllSeasons(),HttpStatus.OK);
     }
 }
