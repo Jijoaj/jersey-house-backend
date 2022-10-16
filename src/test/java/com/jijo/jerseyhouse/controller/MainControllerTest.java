@@ -2,8 +2,8 @@ package com.jijo.jerseyhouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jijo.jerseyhouse.model.Country;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import com.jijo.jerseyhouse.model.League;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("junit")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MainControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -37,29 +38,37 @@ public class MainControllerTest {
         List<Country> countryList = getCountryList();
         String expectedResult = objectMapper.writeValueAsString(countryList);
         this.mockMvc.perform(MockMvcRequestBuilders.get("/main/getCountryList")
-                .accept(MediaType.APPLICATION_JSON))
+                        .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().json(expectedResult));
     }
 
-    private List<Country> getCountryList(){
-        Country testCountry= new Country(1,"SAMPLE_COUNTRY");
-        List<Country> countryList= new ArrayList<>();
+    private List<Country> getCountryList() {
+        Country testCountry = new Country(1, "SAMPLE_COUNTRY");
+        List<Country> countryList = new ArrayList<>();
         countryList.add(testCountry);
-        return  countryList;
+        return countryList;
     }
 
     @Test
     @Order(2)
-    @Sql("classpath:/junit_db_scripts/INSERT_TEST_DATA.sql")
     public void shouldFetchAllLeaguesForCountry() throws Exception {
         List<Country> countryList = getCountryList();
-        String expectedResult = objectMapper.writeValueAsString(countryList);
+        List<League> leagueList = getLeagueList();
+        String expectedResult = objectMapper.writeValueAsString(leagueList);
         this.mockMvc.perform(MockMvcRequestBuilders.get("/main/getLeagueByCountry")
                         .accept(MediaType.APPLICATION_JSON)
-                        .param("country","SAMPLE_COUNTRY"))
+                        .param("country", countryList.get(0).getCountryName()))
                 .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().json(expectedResult));
+    }
+
+    private List<League> getLeagueList() {
+        League testLeague = new League(1, "SAMPLE League");
+        List<League> leagueList = new ArrayList<>();
+        leagueList.add(testLeague);
+        return leagueList;
     }
 }
