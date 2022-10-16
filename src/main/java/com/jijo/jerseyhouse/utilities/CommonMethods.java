@@ -13,7 +13,7 @@ import java.util.Map;
 @Slf4j
 public final class CommonMethods {
     private CommonMethods() {
-        throw new java.lang.UnsupportedOperationException("Utility class and cannot be instantiated");
+        throw new UnsupportedOperationException("Utility class and cannot be instantiated");
     }
     private static final Map<String, String> result= new HashMap<>();
 
