@@ -3,6 +3,7 @@ package com.jijo.jerseyhouse.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
+import com.jijo.jerseyhouse.model.Season;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -70,5 +71,23 @@ public class MainControllerTest {
         List<League> leagueList = new ArrayList<>();
         leagueList.add(testLeague);
         return leagueList;
+    }
+
+    @Test
+    @Order(3)
+    public void shouldFetchAllSeasons() throws Exception {
+        String expectedResult = objectMapper.writeValueAsString(getSeasonList());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/main/getAllSeasons")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().json(expectedResult));
+    }
+
+    private List<Season> getSeasonList() {
+        Season testSeason = new Season(1, 2000,2001);
+        List<Season> seasonList = new ArrayList<>();
+        seasonList.add(testSeason);
+        return seasonList;
     }
 }

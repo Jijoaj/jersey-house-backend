@@ -3,8 +3,10 @@ package com.jijo.jerseyhouse.service.impl;
 import com.jijo.jerseyhouse.aspect.TrackExecutionTime;
 import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
+import com.jijo.jerseyhouse.model.Season;
 import com.jijo.jerseyhouse.repository.CountryRepository;
 import com.jijo.jerseyhouse.repository.LeagueAvailabilityRepository;
+import com.jijo.jerseyhouse.repository.SeasonRepository;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class DeliveryService implements DeliveryServiceInterface {
 
     @Autowired
     LeagueAvailabilityRepository leagueAvailabilityRepository;
+
+    @Autowired
+    SeasonRepository seasonRepository;
 
     /**
      * method getCountryList
@@ -44,5 +49,13 @@ public class DeliveryService implements DeliveryServiceInterface {
     public List<League> getLeagueByCountry(String country) {
         log.info("getCountryList :: fetching available leagues for country : " + country);
         return leagueAvailabilityRepository.getLeagueAvailableForCountry(country);
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public List<Season> getAllSeasons() {
+        return seasonRepository.findAllByOrderByStartYearDesc();
     }
 }
