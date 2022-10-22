@@ -13,8 +13,6 @@ import javax.persistence.*;
 @Getter
 public class Teams {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEAMS_SEQUENCE")
-    @SequenceGenerator(name = "TEAMS_SEQUENCE", sequenceName = "TEAMS_SEQUENCE", allocationSize = 1)
     @Column(name = "teamId", nullable = false)
     private Integer teamId;
     @Column(nullable = false)
