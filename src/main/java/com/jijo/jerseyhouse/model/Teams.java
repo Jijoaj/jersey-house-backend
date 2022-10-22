@@ -19,8 +19,5 @@ public class Teams {
     private String teamName;
     @Column(nullable = false, length = 3)
     private String shortName;
-    @ManyToOne
-    @Setter
-    @JoinColumn(name = "league_league_code")
-    private League league;
+    private Integer leagueCode;
 }
