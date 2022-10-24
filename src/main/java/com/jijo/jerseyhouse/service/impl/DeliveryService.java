@@ -55,6 +55,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      * @return
      */
     @Override
+    @TrackExecutionTime
     public List<Season> getAllSeasons() {
         return seasonRepository.findAllByOrderByStartYearDesc();
     }
