@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class JerseyHouseApplication {
-	private JerseyHouseApplication() {
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(JerseyHouseApplication.class, args);
