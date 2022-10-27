@@ -23,7 +23,7 @@ public class ProductService implements ProductServiceInterface {
     @Override
     @TrackExecutionTime
     public List<Teams> getTeamsByLeagues(List<Integer> leagueCodeList) {
-        if(leagueCodeList.size() == 0) {
+        if(leagueCodeList.isEmpty()) {
             log.info("No Specified leagues selected. returning all teams available");
             return  teamsRepository.findAllByOrderByTeamName();
         }
