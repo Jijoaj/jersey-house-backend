@@ -13,7 +13,7 @@ public interface TeamsRepository extends JpaRepository<Teams, Integer> {
     /* Query to fetch teams list based on the league codes provided*/
     @Query("select t from Teams t " +
             "where t.leagueCode in ?1 " +
-            "Order by teamName ASC")
+            "Order by t.teamName ASC")
     List<Teams> findByLeagueCode(List<Integer> leagueCode);
 
     /* Query to fetch all teams list */
