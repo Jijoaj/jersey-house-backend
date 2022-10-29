@@ -18,7 +18,10 @@ public class Jersey {
     @ManyToOne
     @JoinColumn(name = "team_code")
     private Teams teamCode;
-
     private TShirtSize size;
     private Integer stock;
+    @ManyToOne
+    @JoinColumn(name = "season_code")
+    private Season seasonCode;
+    private String imageUrl;
 }
