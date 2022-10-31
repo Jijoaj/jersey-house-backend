@@ -3,10 +3,10 @@ CREATE SEQUENCE JERSEY_SEQ START WITH 1 INCREMENT BY 1;
 CREATE TABLE jersey
 (
     id          INT NOT NULL,
-    team_code   INT,
-    size        INT,
-    stock       INT,
-    season_code INT,
+    team_code   INT NOT NULL,
+    size        INT NOT NULL,
+    stock       INT NOT NULL,
+    season_code INT NOT NULL,
     image_url   VARCHAR(255),
     CONSTRAINT pk_jersey PRIMARY KEY (id)
 );
