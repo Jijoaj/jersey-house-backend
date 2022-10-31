@@ -4,7 +4,7 @@ CREATE TABLE jersey
 (
     id          INT NOT NULL,
     team_code   INT NOT NULL,
-    size        INT NOT NULL,
+    size        VARCHAR(2) NOT NULL,
     stock       INT NOT NULL,
     season_code INT NOT NULL,
     image_url   VARCHAR(255),
