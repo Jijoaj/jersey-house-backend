@@ -1,0 +1,1 @@
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 1, 's', 10, 20, 'https://images.app.goo.gl/oy3YMSNKNb7t3env9');
