@@ -11,3 +11,11 @@ INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (
 INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 1, 'l', 10, 21, 'https://images.app.goo.gl/LzxLadqmXmgooGMM9');
 INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 1, 'xl', 10, 21, 'https://images.app.goo.gl/LzxLadqmXmgooGMM9');
 INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 1, 'xs', 10, 21, 'https://images.app.goo.gl/LzxLadqmXmgooGMM9');
+
+
+-- FC Barcelona 16
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 5, 's', 10, 16, 'https://images.app.goo.gl/kXgjZSudW3iUbQJ5A');
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 5, 'm', 10, 16, 'https://images.app.goo.gl/kXgjZSudW3iUbQJ5A');
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 5, 'l', 10, 16, 'https://images.app.goo.gl/kXgjZSudW3iUbQJ5A');
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 5, 'xl', 10, 16, 'https://images.app.goo.gl/kXgjZSudW3iUbQJ5A');
+INSERT INTO jersey (id, team_code, size, stock, season_code, image_url) VALUES (NEXTVAL('JERSEY_SEQ'), 5, 'xs', 10, 16, 'https://images.app.goo.gl/kXgjZSudW3iUbQJ5A');
