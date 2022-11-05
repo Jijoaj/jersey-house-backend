@@ -33,6 +33,6 @@ public class TeamsController implements TeamsControllerInterface {
      */
     @Override
     public ResponseEntity<List<Jersey>> getJersey(JerseyRequest jerseyRequest) {
-        return null;
+        return new ResponseEntity<>(productService.getJerseyView(jerseyRequest), HttpStatus.OK);
     }
 }
