@@ -1,7 +1,9 @@
 package com.jijo.jerseyhouse.controller.impl;
 
 import com.jijo.jerseyhouse.controller.TeamsControllerInterface;
+import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
+import com.jijo.jerseyhouse.model.requests.JerseyRequest;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,5 +25,14 @@ public class TeamsController implements TeamsControllerInterface {
     @Override
     public ResponseEntity<List<Teams>> getTeamsByLeagues(List<Integer> leagueCodeList) {
         return new ResponseEntity<>(productService.getTeamsByLeagues(leagueCodeList), HttpStatus.OK);
+    }
+
+    /**
+     * @param jerseyRequest
+     * @return list of all jerseys satisfying filters
+     */
+    @Override
+    public ResponseEntity<List<Jersey>> getJersey(JerseyRequest jerseyRequest) {
+        return null;
     }
 }
