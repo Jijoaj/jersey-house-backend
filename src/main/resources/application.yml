@@ -4,7 +4,6 @@ spring:
     username: sa
     url: jdbc:h2:mem:main-db
     password: test
-
   h2:
     console.path: /h2
 
@@ -28,3 +27,7 @@ size-measures:
   medium: m
   large: l
   extra-large: xl
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger.html
