@@ -23,8 +23,8 @@ public class Jersey {
     @ManyToOne
     @JoinColumn(name = "team_code",  nullable = false)
     private Teams teamCode;
-    @Column(nullable = false)
-    private TShirtSize size;
+    @Column(nullable = false, length = 2)
+    private String size;
     @Column(nullable = false)
     private Integer stock;
     @ManyToOne

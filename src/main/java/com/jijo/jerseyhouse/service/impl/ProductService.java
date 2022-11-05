@@ -60,7 +60,7 @@ public class ProductService implements ProductServiceInterface {
         Root<Jersey> jerseyRoot = queryJersey.from(Jersey.class);
         List<Predicate> predicates= new ArrayList<>();
         if(!jerseyRequest.getSeasons().isEmpty()){
-            queryJersey.where(jerseyRoot.get("season_code").in(jerseyRequest.getSeasons()));
+            queryJersey.where(jerseyRoot.get("seasonCode").in(jerseyRequest.getSeasons()));
         }
         TypedQuery<Jersey> query = em.createQuery(queryJersey);
         return query.getResultList();
