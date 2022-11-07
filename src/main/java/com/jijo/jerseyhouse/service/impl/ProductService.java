@@ -6,29 +6,26 @@ import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.model.requests.JerseyRequest;
 import com.jijo.jerseyhouse.repository.TeamsRepository;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class ProductService implements ProductServiceInterface {
 
-    @Autowired
     EntityManager em;
 
-    @Autowired
     TeamsRepository teamsRepository;
 
     /**
@@ -58,11 +55,21 @@ public class ProductService implements ProductServiceInterface {
         CriteriaBuilder criteriaBuilder= em.getCriteriaBuilder();
         CriteriaQuery<Jersey> queryJersey = criteriaBuilder.createQuery(Jersey.class);
         Root<Jersey> jerseyRoot = queryJersey.from(Jersey.class);
-        List<Predicate> predicates= new ArrayList<>();
+        List<Predicate> predicateList = new ArrayList<>();
         if(!jerseyRequest.getSeasons().isEmpty()){
-            queryJersey.where(jerseyRoot.get("seasonCode").in(jerseyRequest.getSeasons()));
+            predicateList.add(criteriaBuilder.in(jerseyRoot.get("seasonCode").get("seasonCode"))
+                    .value(jerseyRequest.getSeasons()));
+            }
+        if(!jerseyRequest.getTeams().isEmpty()){
+            predicateList.add(criteriaBuilder.in(jerseyRoot.get("teamCode").get("teamId"))
+                    .value(jerseyRequest.getTeams()));
         }
-        TypedQuery<Jersey> query = em.createQuery(queryJersey);
+        if(!jerseyRequest.getSize().isEmpty()){
+            predicateList.add(criteriaBuilder.in(jerseyRoot.get("size"))
+                    .value(jerseyRequest.getSize()));
+        }
+        Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(Predicate[]::new));
+        TypedQuery<Jersey> query = em.createQuery(queryJersey.where(finalPredicate));
         return query.getResultList();
     }
 }
