@@ -6,6 +6,8 @@ spring:
     password: test
   h2:
     console.path: /h2
+  jpa:
+    show-sql: true
 
   devtools:
     restart:
