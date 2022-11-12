@@ -10,6 +10,7 @@ import com.jijo.jerseyhouse.repository.SeasonRepository;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      */
     @Override
     @TrackExecutionTime
+    @Cacheable(value = "league", key = "#country")
     public List<League> getLeagueByCountry(String country) {
         log.info("getCountryList :: fetching available leagues for country : " + country);
         return leagueAvailabilityRepository.getLeagueAvailableForCountry(country);
