@@ -39,11 +39,10 @@ public class ProductService implements ProductServiceInterface {
     @TrackExecutionTime
     @Cacheable(key = "#leagueCodeList")
     public List<Teams> getTeamsByLeagues(List<Integer> leagueCodeList) {
-        if(leagueCodeList.isEmpty()) {
+        if (leagueCodeList.isEmpty()) {
             log.info("No Specified leagues selected. returning all teams available");
-            return  teamsRepository.findAllByOrderByTeamName();
-        }
-        else {
+            return teamsRepository.findAllByOrderByTeamName();
+        } else {
             log.info("Number of leagues selected: " + leagueCodeList.size());
             return teamsRepository.findByLeagueCode(leagueCodeList);
         }
@@ -57,19 +56,19 @@ public class ProductService implements ProductServiceInterface {
     @TrackExecutionTime
     @Cacheable(key = "#jerseyRequest", unless = "#result==null")
     public List<Jersey> getJerseyView(JerseyRequest jerseyRequest) {
-        CriteriaBuilder criteriaBuilder= em.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Jersey> queryJersey = criteriaBuilder.createQuery(Jersey.class);
         Root<Jersey> jerseyRoot = queryJersey.from(Jersey.class);
         List<Predicate> predicateList = new ArrayList<>();
-        if(!jerseyRequest.getSeasons().isEmpty()){
+        if (!jerseyRequest.getSeasons().isEmpty()) {
             predicateList.add(criteriaBuilder.in(jerseyRoot.get("seasonCode").get("seasonCode"))
                     .value(jerseyRequest.getSeasons()));
-            }
-        if(!jerseyRequest.getTeams().isEmpty()){
+        }
+        if (!jerseyRequest.getTeams().isEmpty()) {
             predicateList.add(criteriaBuilder.in(jerseyRoot.get("teamCode").get("teamId"))
                     .value(jerseyRequest.getTeams()));
         }
-        if(!jerseyRequest.getSize().isEmpty()){
+        if (!jerseyRequest.getSize().isEmpty()) {
             predicateList.add(criteriaBuilder.in(jerseyRoot.get("size"))
                     .value(jerseyRequest.getSize()));
         }
