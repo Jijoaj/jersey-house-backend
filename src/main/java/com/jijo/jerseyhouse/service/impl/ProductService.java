@@ -8,6 +8,8 @@ import com.jijo.jerseyhouse.repository.TeamsRepository;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -22,6 +24,7 @@ import java.util.List;
 @Service
 @Slf4j
 @AllArgsConstructor
+@CacheConfig(cacheNames = {"jersey-house-cache"})
 public class ProductService implements ProductServiceInterface {
 
     EntityManager em;
@@ -34,6 +37,7 @@ public class ProductService implements ProductServiceInterface {
      */
     @Override
     @TrackExecutionTime
+    @Cacheable(key = "#leagueCodeList")
     public List<Teams> getTeamsByLeagues(List<Integer> leagueCodeList) {
         if(leagueCodeList.isEmpty()) {
             log.info("No Specified leagues selected. returning all teams available");
@@ -51,6 +55,7 @@ public class ProductService implements ProductServiceInterface {
      */
     @Override
     @TrackExecutionTime
+    @Cacheable(key = "#jerseyRequest", unless = "#result==null")
     public List<Jersey> getJerseyView(JerseyRequest jerseyRequest) {
         CriteriaBuilder criteriaBuilder= em.getCriteriaBuilder();
         CriteriaQuery<Jersey> queryJersey = criteriaBuilder.createQuery(Jersey.class);
