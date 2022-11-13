@@ -7,3 +7,5 @@ spring:
 
   flyway:
     enabled: false
+  cache:
+    type=NONE:
