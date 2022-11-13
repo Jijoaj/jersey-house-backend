@@ -10,7 +10,6 @@ import com.jijo.jerseyhouse.repository.SeasonRepository;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +57,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      */
     @Override
     @TrackExecutionTime
-    @Cacheable(cacheNames = {"jersey-house-cache"},key = "{#root.methodName}")
+    @Cacheable(cacheNames = {"jersey-house-cache"}, key = "{#root.methodName}")
     public List<Season> getAllSeasons() {
         return seasonRepository.findAllByOrderByStartYearDesc();
     }

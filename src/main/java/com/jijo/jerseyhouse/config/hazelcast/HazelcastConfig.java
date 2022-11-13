@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 public class HazelcastConfig {
 
     @Bean
-    public Config hazelcastConfiguration(){
+    public Config hazelcastConfiguration() {
         return new Config()
                 .setInstanceName("hazelcast-instance")
                 .addMapConfig(new MapConfig()
@@ -22,7 +22,7 @@ public class HazelcastConfig {
                                 .setSize(200)
                                 .setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_SIZE)
                                 .setEvictionPolicy(EvictionPolicy.LRU)
-                ));
+                        ));
 
     }
 }

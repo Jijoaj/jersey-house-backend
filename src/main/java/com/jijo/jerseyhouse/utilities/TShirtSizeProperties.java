@@ -23,7 +23,6 @@ public class TShirtSizeProperties {
     String medium;
     String large;
     String extraLarge;
-
     @Bean
     public TShirtSizeProperties setTShirtSizeProperties(TShirtSizeProperties properties){
         return properties;
