@@ -29,6 +29,7 @@ size-measures:
   medium: m
   large: l
   extra-large: xl
+
 springdoc:
   swagger-ui:
     enabled: true

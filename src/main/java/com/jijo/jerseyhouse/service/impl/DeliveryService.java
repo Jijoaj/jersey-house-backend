@@ -8,6 +8,7 @@ import com.jijo.jerseyhouse.repository.CountryRepository;
 import com.jijo.jerseyhouse.repository.LeagueAvailabilityRepository;
 import com.jijo.jerseyhouse.repository.SeasonRepository;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,15 +18,13 @@ import java.util.List;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class DeliveryService implements DeliveryServiceInterface {
 
-    @Autowired
     CountryRepository countryRepository;
 
-    @Autowired
     LeagueAvailabilityRepository leagueAvailabilityRepository;
 
-    @Autowired
     SeasonRepository seasonRepository;
 
     /**
@@ -35,6 +34,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      */
     @Override
     @TrackExecutionTime
+    @Cacheable(cacheNames = {"jersey-house-cache"}, key = "{#root.methodName}")
     public List<Country> getCountryList() {
         return countryRepository.findAllByOrderByCountryName();
     }
@@ -47,7 +47,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      */
     @Override
     @TrackExecutionTime
-    @Cacheable(value = "league", key = "#country")
+    @Cacheable(value = "jersey-house-cache", key = "#country", unless = "#result==null")
     public List<League> getLeagueByCountry(String country) {
         log.info("getCountryList :: fetching available leagues for country : " + country);
         return leagueAvailabilityRepository.getLeagueAvailableForCountry(country);
@@ -58,6 +58,7 @@ public class DeliveryService implements DeliveryServiceInterface {
      */
     @Override
     @TrackExecutionTime
+    @Cacheable(cacheNames = {"jersey-house-cache"},key = "{#root.methodName}")
     public List<Season> getAllSeasons() {
         return seasonRepository.findAllByOrderByStartYearDesc();
     }
