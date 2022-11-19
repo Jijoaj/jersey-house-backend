@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("teams")
 public interface TeamsControllerInterface {
 
-    @GetMapping("getTeamsByLeagues")
+    @PostMapping("getTeamsByLeagues")
     ResponseEntity<List<Teams>> getTeamsByLeagues(@RequestBody List<Integer> leagueCodeList);
 
     @PostMapping("getJerseyView")

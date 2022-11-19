@@ -21,8 +21,6 @@ public class HazelcastConfig {
                         .setEvictionConfig(new EvictionConfig()
                                 .setSize(200)
                                 .setMaxSizePolicy(MaxSizePolicy.FREE_HEAP_SIZE)
-                                .setEvictionPolicy(EvictionPolicy.LRU)
-                        ));
-
+                                .setEvictionPolicy(EvictionPolicy.LRU)));
     }
 }
