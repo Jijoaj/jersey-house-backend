@@ -1,14 +1,12 @@
 package com.jijo.jerseyhouse.model;
 
-import com.jijo.jerseyhouse.model.enums.TShirtSize;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Builder
 @NoArgsConstructor
@@ -17,7 +15,7 @@ import javax.persistence.*;
 public class Jersey {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jersey_seq")
-    @SequenceGenerator(name = "jersey_seq",initialValue = 1,allocationSize = 1)
+    @SequenceGenerator(name = "jersey_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Integer id;
     @ManyToOne
