@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jijo.jerseyhouse.controller.ControllerTestConfig.getLeagueList;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -25,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("junit")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Order(1)
+@TestClassOrder(ClassOrderer.OrderAnnotation.class)
 public class MainControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -64,13 +67,6 @@ public class MainControllerTest {
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().json(expectedResult));
-    }
-
-    private List<League> getLeagueList() {
-        League testLeague = new League(1, "SAMPLE League");
-        List<League> leagueList = new ArrayList<>();
-        leagueList.add(testLeague);
-        return leagueList;
     }
 
     @Test
