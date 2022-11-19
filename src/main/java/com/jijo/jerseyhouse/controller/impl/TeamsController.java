@@ -5,7 +5,6 @@ import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.model.requests.JerseyRequest;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController
 public class TeamsController implements TeamsControllerInterface {
 
-    @Autowired
-    ProductServiceInterface productService;
+    private final ProductServiceInterface productService;
+
+    public TeamsController(ProductServiceInterface productService) {
+        this.productService = productService;
+    }
 
     /**
      * @param leagueCodeList

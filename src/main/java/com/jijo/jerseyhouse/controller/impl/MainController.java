@@ -5,7 +5,6 @@ import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
 import com.jijo.jerseyhouse.model.Season;
 import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController
 public class MainController implements MainControllerInterface {
 
-    @Autowired
-    DeliveryServiceInterface deliveryService;
+    private final DeliveryServiceInterface deliveryService;
+
+    public MainController(DeliveryServiceInterface deliveryService) {
+        this.deliveryService = deliveryService;
+    }
 
     @Override
     public ResponseEntity<String> connect() {
