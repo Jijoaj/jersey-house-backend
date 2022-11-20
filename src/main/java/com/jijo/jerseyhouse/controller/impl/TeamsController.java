@@ -37,4 +37,13 @@ public class TeamsController implements TeamsControllerInterface {
     public ResponseEntity<List<Jersey>> getJersey(JerseyRequest jerseyRequest) {
         return new ResponseEntity<>(productService.getJerseyView(jerseyRequest), HttpStatus.OK);
     }
+
+    /**
+     * @param jerseyRequest
+     * @return list of all jerseys satisfying filters grouped by Team, size and seasons
+     */
+    @Override
+    public ResponseEntity<List<Jersey>> getJerseyGroupedBySize(JerseyRequest jerseyRequest) {
+        return new ResponseEntity<>(productService.getJerseyViewGrouped(jerseyRequest), HttpStatus.OK);;
+    }
 }
