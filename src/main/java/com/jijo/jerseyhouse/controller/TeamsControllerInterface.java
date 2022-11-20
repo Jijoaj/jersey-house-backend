@@ -17,6 +17,9 @@ public interface TeamsControllerInterface {
     @PostMapping("getTeamsByLeagues")
     ResponseEntity<List<Teams>> getTeamsByLeagues(@RequestBody List<Integer> leagueCodeList);
 
-    @PostMapping("getJerseyView")
+    @PostMapping("getJerseyView/single")
     ResponseEntity<List<Jersey>> getJersey(@RequestBody JerseyRequest jerseyRequest);
+
+    @PostMapping("getJerseyView/grouped")
+    ResponseEntity<List<Jersey>> getJerseyGroupedBySize(@RequestBody JerseyRequest jerseyRequest);
 }
