@@ -86,6 +86,6 @@ public class ProductService implements ProductServiceInterface {
      */
     @Override
     public List<Jersey> getJerseyViewGrouped(JerseyRequest jerseyRequest) {
-        return jerseyRepository.findAll();
+        return jerseyRepository.findJerseyView(jerseyRequest);
     }
 }
