@@ -9,4 +9,6 @@ public interface ProductServiceInterface {
     List<Teams> getTeamsByLeagues(List<Integer> leagueCodeList);
 
     List<Jersey> getJerseyView(JerseyRequest jerseyRequest);
+
+    List<Jersey> getJerseyViewGrouped(JerseyRequest jerseyRequest);
 }
