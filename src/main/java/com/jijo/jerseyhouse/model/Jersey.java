@@ -1,6 +1,6 @@
 package com.jijo.jerseyhouse.model;
 
-import com.jijo.jerseyhouse.model.enums.TShirtSize;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

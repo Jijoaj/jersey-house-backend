@@ -4,6 +4,7 @@ import com.jijo.jerseyhouse.aspect.TrackExecutionTime;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.model.requests.JerseyRequest;
+import com.jijo.jerseyhouse.repository.JerseyRepository;
 import com.jijo.jerseyhouse.repository.TeamsRepository;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,8 @@ public class ProductService implements ProductServiceInterface {
     EntityManager em;
 
     TeamsRepository teamsRepository;
+
+    JerseyRepository jerseyRepository;
 
     /**
      * @param leagueCodeList
@@ -75,5 +78,14 @@ public class ProductService implements ProductServiceInterface {
         Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(Predicate[]::new));
         TypedQuery<Jersey> query = em.createQuery(queryJersey.where(finalPredicate));
         return query.getResultList();
+    }
+
+    /**
+     * @param jerseyRequest JerseyRequest
+     * @return list of all jerseys satisfying filters grouped by Team, size and seasons
+     */
+    @Override
+    public List<Jersey> getJerseyViewGrouped(JerseyRequest jerseyRequest) {
+        return jerseyRepository.findAll();
     }
 }
