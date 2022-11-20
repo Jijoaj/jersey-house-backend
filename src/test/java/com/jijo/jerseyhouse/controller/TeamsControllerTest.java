@@ -1,20 +1,15 @@
 package com.jijo.jerseyhouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jijo.jerseyhouse.model.League;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.util.CollectionUtils;
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,6 +54,18 @@ public class TeamsControllerTest {
                 )
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    @Test
+    @Order(3)
+    void testGetTeamsForNonLeague() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/teams/getTeamsByLeagues")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(Collections.singleton("2")))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(content().json("[]"));
     }
 
     private static List<Integer> getLeagueNameList() {
