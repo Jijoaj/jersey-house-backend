@@ -44,6 +44,6 @@ public class TeamsController implements TeamsControllerInterface {
      */
     @Override
     public ResponseEntity<List<Jersey>> getJerseyGroupedBySize(JerseyRequest jerseyRequest) {
-        return new ResponseEntity<>(productService.getJerseyViewGrouped(jerseyRequest), HttpStatus.OK);;
+        return new ResponseEntity<>(productService.getJerseyViewGrouped(jerseyRequest), HttpStatus.OK);
     }
 }
