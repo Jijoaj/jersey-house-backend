@@ -13,10 +13,10 @@ import java.util.List;
 public interface JerseyRepository extends JpaRepository<Jersey, Integer> {
     @Query("select j " +
             "from Jersey j " +
-            "where j.teamCode in ?#{#jerseyRequest.teams} " +
-            "and j.size in ?#{#jerseyRequest.size} " +
-            "and j.seasonCode in ?#{#jerseyRequest.seasons} " +
-            "group by j.seasonCode, j.teamCode " +
+            "where ((?#{#jerseyRequest.teams}) is null or j.teamCode.teamId in (?#{#jerseyRequest.teams})) " +
+            "and ((?#{#jerseyRequest.size}) is null or j.size in (?#{#jerseyRequest.size})) " +
+            "and ((?#{#jerseyRequest.seasons}) is null or j.seasonCode.seasonCode in (?#{#jerseyRequest.seasons})) " +
+//            "group by j.seasonCode, j.teamCode " +
             "order by j.teamCode.teamId")
     List<Jersey> findJerseyView(@Param("jerseyRequest") JerseyRequest jerseyRequest);
 }

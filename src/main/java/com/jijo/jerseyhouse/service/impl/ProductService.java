@@ -86,6 +86,9 @@ public class ProductService implements ProductServiceInterface {
      */
     @Override
     public List<Jersey> getJerseyViewGrouped(JerseyRequest jerseyRequest) {
+        jerseyRequest.setSeasons(jerseyRequest.getSeasons().isEmpty() ? null: jerseyRequest.getSeasons());
+        jerseyRequest.setSize(jerseyRequest.getSize().isEmpty() ? null: jerseyRequest.getSize());
+        jerseyRequest.setTeams(jerseyRequest.getTeams().isEmpty() ? null: jerseyRequest.getTeams());
         return jerseyRepository.findJerseyView(jerseyRequest);
     }
 }
