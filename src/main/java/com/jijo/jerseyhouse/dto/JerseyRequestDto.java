@@ -1,4 +1,4 @@
-package com.jijo.jerseyhouse.model.requests;
+package com.jijo.jerseyhouse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JerseyRequest {
+public class JerseyRequestDto {
     List<Integer> Teams;
     List<Integer> seasons;
     List<String> size;
