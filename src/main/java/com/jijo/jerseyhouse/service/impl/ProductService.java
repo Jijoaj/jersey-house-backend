@@ -97,10 +97,9 @@ public class ProductService implements ProductServiceInterface {
         jerseyRequestDto.setSize(jerseyRequestDto.getSize().isEmpty() ? null: jerseyRequestDto.getSize());
         jerseyRequestDto.setTeams(jerseyRequestDto.getTeams().isEmpty() ? null: jerseyRequestDto.getTeams());
         List<Object[]> jerseyViewResultFromDB = jerseyRepository.findJerseyView(jerseyRequestDto);
-        List<JerseyViewDto> result = jerseyViewResultFromDB.stream()
+        return jerseyViewResultFromDB.stream()
                 .map(JerseyTransformer::toJerseyViewDto)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        return result;
     }
 }
