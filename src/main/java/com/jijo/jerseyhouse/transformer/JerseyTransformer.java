@@ -24,5 +24,5 @@ public class JerseyTransformer {
         }
         log.info("successfully transformed to Jersey view response: {}",response.toString());
         return response;
-    };
+    }
 }
