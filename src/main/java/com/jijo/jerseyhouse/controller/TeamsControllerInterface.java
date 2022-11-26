@@ -1,10 +1,10 @@
 package com.jijo.jerseyhouse.controller;
 
+import com.jijo.jerseyhouse.dto.JerseyViewDto;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
-import com.jijo.jerseyhouse.model.requests.JerseyRequest;
+import com.jijo.jerseyhouse.dto.JerseyRequestDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,8 @@ public interface TeamsControllerInterface {
     ResponseEntity<List<Teams>> getTeamsByLeagues(@RequestBody List<Integer> leagueCodeList);
 
     @PostMapping("getJerseyView/single")
-    ResponseEntity<List<Jersey>> getJersey(@RequestBody JerseyRequest jerseyRequest);
+    ResponseEntity<List<Jersey>> getJersey(@RequestBody JerseyRequestDto jerseyRequestDto);
 
     @PostMapping("getJerseyView/grouped")
-    ResponseEntity<List<Jersey>> getJerseyGroupedBySize(@RequestBody JerseyRequest jerseyRequest);
+    ResponseEntity<List<JerseyViewDto>> getJerseyGroupedBySize(@RequestBody JerseyRequestDto jerseyRequestDto);
 }
