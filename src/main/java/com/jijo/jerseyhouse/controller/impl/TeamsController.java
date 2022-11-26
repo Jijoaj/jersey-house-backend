@@ -1,9 +1,10 @@
 package com.jijo.jerseyhouse.controller.impl;
 
 import com.jijo.jerseyhouse.controller.TeamsControllerInterface;
+import com.jijo.jerseyhouse.dto.JerseyViewDto;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
-import com.jijo.jerseyhouse.model.requests.JerseyRequest;
+import com.jijo.jerseyhouse.dto.JerseyRequestDto;
 import com.jijo.jerseyhouse.service.ProductServiceInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,20 +31,20 @@ public class TeamsController implements TeamsControllerInterface {
     }
 
     /**
-     * @param jerseyRequest
+     * @param jerseyRequestDto
      * @return list of all jerseys satisfying filters
      */
     @Override
-    public ResponseEntity<List<Jersey>> getJersey(JerseyRequest jerseyRequest) {
-        return new ResponseEntity<>(productService.getJerseyView(jerseyRequest), HttpStatus.OK);
+    public ResponseEntity<List<Jersey>> getJersey(JerseyRequestDto jerseyRequestDto) {
+        return new ResponseEntity<>(productService.getJerseyView(jerseyRequestDto), HttpStatus.OK);
     }
 
     /**
-     * @param jerseyRequest
+     * @param jerseyRequestDto
      * @return list of all jerseys satisfying filters grouped by Team, size and seasons
      */
     @Override
-    public ResponseEntity<List<Jersey>> getJerseyGroupedBySize(JerseyRequest jerseyRequest) {
-        return new ResponseEntity<>(productService.getJerseyViewGrouped(jerseyRequest), HttpStatus.OK);;
+    public ResponseEntity<List<JerseyViewDto>> getJerseyGroupedBySize(JerseyRequestDto jerseyRequestDto) {
+        return new ResponseEntity<>(productService.getJerseyViewGrouped(jerseyRequestDto), HttpStatus.OK);
     }
 }
