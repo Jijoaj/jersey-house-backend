@@ -2,6 +2,7 @@ package com.jijo.jerseyhouse.repository;
 
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.dto.JerseyRequestDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +20,5 @@ public interface JerseyRepository extends JpaRepository<Jersey, Integer> {
             "and ((?#{#jerseyRequest.seasons}) is null or j.seasonCode.seasonCode in (?#{#jerseyRequest.seasons})) " +
             "group by j.seasonCode, j.teamCode.teamId, j.teamCode.teamName " +
             "order by j.teamCode.teamId")
-    List<Object[]> findJerseyView(@Param("jerseyRequest") JerseyRequestDto jerseyRequestDto);
+    List<Object[]> findJerseyView(@Param("jerseyRequest") JerseyRequestDto jerseyRequestDto, Pageable pageable);
 }
