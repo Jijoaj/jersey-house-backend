@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -94,7 +95,7 @@ public class ProductService implements ProductServiceInterface {
         jerseyRequestDto.setSeasons(jerseyRequestDto.getSeasons().isEmpty() ? null: jerseyRequestDto.getSeasons());
         jerseyRequestDto.setSize(jerseyRequestDto.getSize().isEmpty() ? null: jerseyRequestDto.getSize());
         jerseyRequestDto.setTeams(jerseyRequestDto.getTeams().isEmpty() ? null: jerseyRequestDto.getTeams());
-        List<Object[]> jerseyViewResultFromDB = jerseyRepository.findJerseyView(jerseyRequestDto);
+        List<Object[]> jerseyViewResultFromDB = jerseyRepository.findJerseyView(jerseyRequestDto, PageRequest.of(jerseyRequestDto.getPage(), jerseyRequestDto.getRecords()));
         return jerseyViewResultFromDB.stream()
                 .map(JerseyTransformer::toJerseyViewDto)
                 .filter(Objects::nonNull)
