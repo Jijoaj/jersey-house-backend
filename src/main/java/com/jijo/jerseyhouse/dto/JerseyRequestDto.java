@@ -10,7 +10,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JerseyRequestDto {
-    List<Integer> Teams;
-    List<Integer> seasons;
-    List<String> size;
+    private List<Integer> Teams;
+    private List<Integer> seasons;
+    private List<String> size;
+    private int page;
+    private int records;
 }
