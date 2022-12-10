@@ -30,4 +30,9 @@ public final class CommonMethods {
         result.put("status", "failed");
         return result;
     }
+    
+    public static Map<String,String> getPendingMapResponse(){
+        result.put("status", "pending");
+        return result;
+    }
 }
