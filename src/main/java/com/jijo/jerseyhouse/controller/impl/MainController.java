@@ -4,7 +4,7 @@ import com.jijo.jerseyhouse.controller.MainControllerInterface;
 import com.jijo.jerseyhouse.model.Country;
 import com.jijo.jerseyhouse.model.League;
 import com.jijo.jerseyhouse.model.Season;
-import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
+import com.jijo.jerseyhouse.service.DeliveryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 public class MainController implements MainControllerInterface {
 
-    private final DeliveryServiceInterface deliveryService;
+    private final DeliveryService deliveryService;
 
-    public MainController(DeliveryServiceInterface deliveryService) {
+    public MainController(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
     }
 
