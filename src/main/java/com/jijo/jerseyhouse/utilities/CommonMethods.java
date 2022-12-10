@@ -26,4 +26,8 @@ public final class CommonMethods {
         return result;
     }
 
+    public static Map<String,String> getFailureMapResponse(){
+        result.put("status", "failed");
+        return result;
+    }
 }
