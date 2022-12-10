@@ -6,7 +6,7 @@ import com.jijo.jerseyhouse.model.Season;
 
 import java.util.List;
 
-public interface DeliveryServiceInterface {
+public interface DeliveryService {
     List<Country> getCountryList();
 
     List<League> getLeagueByCountry(String country);

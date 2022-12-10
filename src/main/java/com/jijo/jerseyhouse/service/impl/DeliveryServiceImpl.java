@@ -7,7 +7,7 @@ import com.jijo.jerseyhouse.model.Season;
 import com.jijo.jerseyhouse.repository.CountryRepository;
 import com.jijo.jerseyhouse.repository.LeagueAvailabilityRepository;
 import com.jijo.jerseyhouse.repository.SeasonRepository;
-import com.jijo.jerseyhouse.service.DeliveryServiceInterface;
+import com.jijo.jerseyhouse.service.DeliveryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class DeliveryService implements DeliveryServiceInterface {
+public class DeliveryServiceImpl implements DeliveryService {
 
     CountryRepository countryRepository;
 

@@ -5,10 +5,9 @@ import com.jijo.jerseyhouse.dto.JerseyViewDto;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.dto.JerseyRequestDto;
-import com.jijo.jerseyhouse.model.enums.JerseyViewSortBy;
 import com.jijo.jerseyhouse.repository.JerseyRepository;
 import com.jijo.jerseyhouse.repository.TeamsRepository;
-import com.jijo.jerseyhouse.service.ProductServiceInterface;
+import com.jijo.jerseyhouse.service.ProductService;
 import com.jijo.jerseyhouse.transformer.JerseyTransformer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @AllArgsConstructor
 @CacheConfig(cacheNames = {"jersey-house-cache"})
-public class ProductService implements ProductServiceInterface {
+public class ProductServiceImpl implements ProductService {
 
     EntityManager em;
 

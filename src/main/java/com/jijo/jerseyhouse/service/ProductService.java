@@ -6,7 +6,7 @@ import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.dto.JerseyRequestDto;
 
 import java.util.List;
-public interface ProductServiceInterface {
+public interface ProductService {
     List<Teams> getTeamsByLeagues(List<Integer> leagueCodeList);
 
     List<Jersey> getJerseyView(JerseyRequestDto jerseyRequestDto);
