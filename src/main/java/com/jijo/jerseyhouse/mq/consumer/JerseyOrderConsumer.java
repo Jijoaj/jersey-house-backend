@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class JerseyOrderConsumer {
     @RabbitListener(queues = QueueConstants.orderQueueName)
     public void consumeJerseyOrderFromQueue(JerseyOrderPlacementDto jerseyOrderPlacementDto) throws InterruptedException {
-        log.info("Order received : {} from user : {}", jerseyOrderPlacementDto, jerseyOrderPlacementDto.getUserId());
+        log.info("Order received : {}", jerseyOrderPlacementDto);
         Thread.sleep(5000);
         // TODO save order
         log.info("Order saved");
