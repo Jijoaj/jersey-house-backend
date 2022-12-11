@@ -26,4 +26,13 @@ public final class CommonMethods {
         return result;
     }
 
+    public static Map<String,String> getFailureMapResponse(){
+        result.put("status", "failed");
+        return result;
+    }
+
+    public static Map<String,String> getPendingMapResponse(){
+        result.put("status", "pending");
+        return result;
+    }
 }

@@ -2,6 +2,7 @@ package com.jijo.jerseyhouse.controller;
 
 import com.jijo.jerseyhouse.dto.JerseyOrderDto;
 import com.jijo.jerseyhouse.dto.JerseyViewDto;
+import com.jijo.jerseyhouse.exception.CommonInternalException;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
 import com.jijo.jerseyhouse.dto.JerseyRequestDto;
@@ -27,5 +28,5 @@ public interface TeamsControllerInterface {
     ResponseEntity<List<JerseyViewDto>> getJerseyGroupedBySize(@RequestBody JerseyRequestDto jerseyRequestDto);
 
     @PostMapping("/order")
-    ResponseEntity<Map<String, String>> postJerseyOrder(@RequestBody JerseyOrderDto JerseyOrderDto, @RequestHeader String userId);
+    ResponseEntity<Map<String, String>> postJerseyOrder(@RequestBody JerseyOrderDto JerseyOrderDto, @RequestHeader String userId) throws CommonInternalException;
 }
