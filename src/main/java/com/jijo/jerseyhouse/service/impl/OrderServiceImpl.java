@@ -5,9 +5,7 @@ import com.jijo.jerseyhouse.dto.JerseyOrderPlacementDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;
 import com.jijo.jerseyhouse.mq.publisher.JerseyOrderPublisher;
 import com.jijo.jerseyhouse.service.OrderService;
-import com.jijo.jerseyhouse.utilities.CommonMethods;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
