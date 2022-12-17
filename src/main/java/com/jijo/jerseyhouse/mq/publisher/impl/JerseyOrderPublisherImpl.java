@@ -28,10 +28,10 @@ public class JerseyOrderPublisherImpl implements JerseyOrderPublisher {
     public Map<String, String> publishOrder(JerseyOrderPlacementDto jerseyOrderPlacementDto) throws CommonInternalException {
         try {
             rabbitTemplate.convertAndSend(QueueConstants.orderExchangeName, QueueConstants.orderRoutingKey, jerseyOrderPlacementDto);
+            return CommonMethods.getPendingMapResponse();
         }catch (Exception e) {
             log.error("Failed to send order to queue", e);
             throw new CommonInternalException("Error while sending order to queue");
         }
-        return CommonMethods.getPendingMapResponse();
     }
 }
