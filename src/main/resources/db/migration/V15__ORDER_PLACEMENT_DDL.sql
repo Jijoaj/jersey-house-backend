@@ -8,5 +8,6 @@ CREATE TABLE order_placement
     quantity          INT          NOT NULL,
     order_date        TIMESTAMP,
     order_placed_date TIMESTAMP,
+    order_status      VARCHAR,
     CONSTRAINT pk_orderplacement PRIMARY KEY (order_id)
 );
