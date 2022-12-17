@@ -1,4 +1,4 @@
-package com.jijo.jerseyhouse.mq.consumer;
+package com.jijo.jerseyhouse.messaging.consumer;
 
 import com.jijo.jerseyhouse.dto.JerseyOrderPlacementDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;
