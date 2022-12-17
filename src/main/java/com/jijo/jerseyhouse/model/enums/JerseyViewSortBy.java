@@ -4,7 +4,7 @@ public enum JerseyViewSortBy {
     teamName("teamCode.teamName"),
     season("seasonCode.seasonCode");
 
-    public String value;
+    public final String value;
     JerseyViewSortBy(String fieldName) {
         this.value = fieldName;
     }
