@@ -9,6 +9,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class OrderTransformer {
+    private OrderTransformer() {
+        throw new UnsupportedOperationException("Transformer class and cannot be instantiated");
+    }
+
     public static OrderPlacement createOrder(JerseyOrderPlacementDto jerseyOrderPlacementDto) {
         return OrderPlacement.builder()
                 .orderId(UUID.randomUUID().toString())
