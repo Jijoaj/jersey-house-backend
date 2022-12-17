@@ -28,7 +28,7 @@ public class JerseyOrderConsumer {
         log.info("Order received : {}", jerseyOrderPlacementDto);
         Thread.sleep(5000);
         try {
-            orderPlacementRepository.save(OrderTransformer.toOrderPlacement(jerseyOrderPlacementDto));
+            orderPlacementRepository.save(OrderTransformer.createOrder(jerseyOrderPlacementDto));
         }catch (Exception e) {
             throw new CommonInternalException(ERROR_WHILE_SAVING_ORDER);
         }
