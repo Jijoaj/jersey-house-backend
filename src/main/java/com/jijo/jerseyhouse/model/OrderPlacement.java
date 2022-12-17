@@ -15,6 +15,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+import static com.jijo.jerseyhouse.utilities.constants.MessageConstants.ORDER_QUANTITY_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO_ONE;
+
 @Entity
 @Data
 @Builder
@@ -28,7 +30,7 @@ public class OrderPlacement {
     private int teamId;
     private int seasonCode;
     private String size;
-    @Min(message = MessageConstants.ORDER_QUANTITY_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO_ONE, value = 1)
+    @Min(message = ORDER_QUANTITY_SHOULD_BE_GREATER_THAN_OR_EQUAL_TO_ONE, value = 1)
     @Column(nullable = false)
     private int quantity;
     private Date orderDate;

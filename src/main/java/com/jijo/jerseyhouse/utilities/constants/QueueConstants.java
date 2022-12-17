@@ -1,7 +1,7 @@
 package com.jijo.jerseyhouse.utilities.constants;
 
-public interface QueueConstants {
-    String orderQueueName = "ORDER_QUEUE";
-    String orderExchangeName = "ORDER_EXCHANGE";
-    String orderRoutingKey = "ORDER_ROUTING_KEY";
+public class QueueConstants {
+    public static final String orderQueueName = "ORDER_QUEUE";
+    public static final String orderExchangeName = "ORDER_EXCHANGE";
+    public static final String orderRoutingKey = "ORDER_ROUTING_KEY";
 }
