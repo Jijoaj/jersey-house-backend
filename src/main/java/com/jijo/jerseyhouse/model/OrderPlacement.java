@@ -1,5 +1,6 @@
 package com.jijo.jerseyhouse.model;
 
+import com.jijo.jerseyhouse.model.enums.OrderStatus;
 import com.jijo.jerseyhouse.utilities.constants.MessageConstants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,4 +34,5 @@ public class OrderPlacement {
     private Date orderDate;
     @CreationTimestamp
     private Date orderPlacedDate;
+    private String orderStatus ;
 }
