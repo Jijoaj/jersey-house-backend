@@ -16,5 +16,5 @@ steps:
       - --app=jersey-house-backend
       - --image=gcr.io/${PROJECT_ID}/jersey-house-backend:latest
       - --filename=K8s_configs/
-      - --location=us-central1-c
+      - --location=us-central1
       - --cluster=jersey-house-backend-cluster
