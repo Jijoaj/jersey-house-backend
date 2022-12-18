@@ -32,7 +32,6 @@ public class JerseyOrderConsumer {
         }catch (Exception e) {
             throw new CommonInternalException(ERROR_WHILE_SAVING_ORDER);
         }
-
         log.info(ORDER_SAVED);
     }
 }
