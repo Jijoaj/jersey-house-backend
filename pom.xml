@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jijo</groupId>
-	<artifactId>jersey-house</artifactId>
+	<artifactId>jersey-house-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jersey-house</name>
 	<description>Demo project for Spring Boot</description>
