@@ -3,7 +3,7 @@ package com.jijo.jerseyhouse.service.impl;
 import com.jijo.jerseyhouse.dto.JerseyOrderDto;
 import com.jijo.jerseyhouse.dto.JerseyOrderPlacementDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;
-import com.jijo.jerseyhouse.mq.publisher.JerseyOrderPublisher;
+import com.jijo.jerseyhouse.messaging.publisher.JerseyOrderPublisher;
 import com.jijo.jerseyhouse.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

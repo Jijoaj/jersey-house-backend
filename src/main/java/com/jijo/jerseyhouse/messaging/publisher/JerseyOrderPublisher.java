@@ -1,4 +1,4 @@
-package com.jijo.jerseyhouse.mq.publisher;
+package com.jijo.jerseyhouse.messaging.publisher;
 
 import com.jijo.jerseyhouse.dto.JerseyOrderPlacementDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;

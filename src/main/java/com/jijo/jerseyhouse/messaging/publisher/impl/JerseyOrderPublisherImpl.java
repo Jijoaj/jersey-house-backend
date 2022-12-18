@@ -1,8 +1,8 @@
-package com.jijo.jerseyhouse.mq.publisher.impl;
+package com.jijo.jerseyhouse.messaging.publisher.impl;
 
 import com.jijo.jerseyhouse.dto.JerseyOrderPlacementDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;
-import com.jijo.jerseyhouse.mq.publisher.JerseyOrderPublisher;
+import com.jijo.jerseyhouse.messaging.publisher.JerseyOrderPublisher;
 import com.jijo.jerseyhouse.utilities.CommonMethods;
 import com.jijo.jerseyhouse.utilities.constants.QueueConstants;
 import lombok.extern.slf4j.Slf4j;
