@@ -1,0 +1,20 @@
+#cloud build for hello app
+steps:
+  - name: maven:3.6.0-jdk-11
+    id: 'Build'
+    entrypoint: mvn
+    args: ['package','-Dmaven.test.skip=true','-DPROJECT_ID=${PROJECT_ID}']
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push'
+    waitFor: ['Build']
+    args: ['push','gcr.io/${PROJECT_ID}/jersey-house-backend:latest']
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    id: 'Deploy to GKE'
+    waitFor: ['Build','Push']
+    args:
+      - run
+      - --app=jersey-house-backend
+      - --image=gcr.io/${PROJECT_ID}/jersey-house-backend:latest
+      - --filename=K8s_configs/
+      - --location=us-central1-c
+      - --cluster=jersey-house-backend-cluster
