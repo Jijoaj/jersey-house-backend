@@ -18,4 +18,12 @@ public class LoggingProcess {
         log.info("Process {} : {} completed",point.getSignature().getDeclaringType(),point.getSignature().getName());
         return proceed;
     }
+
+    @Around("execution(* com.jijo.jerseyhouse.scheduler.order.*.*(..))")
+    public Object logScheduleProcess(ProceedingJoinPoint point) throws Throwable {
+        log.info("scheduled process {} started", point.getSignature().getName());
+        Object proceed = point.proceed();
+        log.info("scheduled process {} completed", point.getSignature().getName());
+        return proceed;
+    }
 }
