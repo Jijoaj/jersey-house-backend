@@ -4,7 +4,8 @@ public enum OrderStatus {
     CREATED("CREATED"),
     CONFIRMED("CONFIRMED"),
     IN_PROGRESS("IN_PROGRESS"),
-    COMPLETED("COMPLETED");
+    COMPLETED("COMPLETED"),
+    FAILED("FAILED");
 
     public final String orderStatus;
 
