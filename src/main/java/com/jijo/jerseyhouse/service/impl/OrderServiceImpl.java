@@ -28,7 +28,6 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Map<String, String> orderJersey(JerseyOrderDto jerseyOrderDto, String userId) throws CommonInternalException {
-        // TODO send order to rabbitMQ
         try {
             JerseyOrderPlacementDto newOrder = new JerseyOrderPlacementDto(jerseyOrderDto, userId);
             return jerseyOrderPublisher.publishOrder(newOrder);

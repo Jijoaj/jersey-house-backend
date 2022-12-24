@@ -28,6 +28,7 @@ public class JerseyOrderPublisherImpl implements JerseyOrderPublisher {
     public Map<String, String> publishOrder(JerseyOrderPlacementDto jerseyOrderPlacementDto) throws CommonInternalException {
         try {
             rabbitTemplate.convertAndSend(QueueConstants.orderExchangeName, QueueConstants.orderRoutingKey, jerseyOrderPlacementDto);
+            log.info("order successfully sent to RabbitMQ Queue");
             return CommonMethods.getPendingMapResponse();
         }catch (Exception e) {
             log.error("Failed to send order to queue", e);
