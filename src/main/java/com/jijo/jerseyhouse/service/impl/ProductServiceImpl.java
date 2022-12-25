@@ -69,6 +69,12 @@ public class ProductServiceImpl implements ProductService {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Jersey> queryJersey = criteriaBuilder.createQuery(Jersey.class);
         Root<Jersey> jerseyRoot = queryJersey.from(Jersey.class);
+        Predicate finalPredicate = getFinalPredicate(jerseyRequestDto, criteriaBuilder, jerseyRoot);
+        TypedQuery<Jersey> query = em.createQuery(queryJersey.where(finalPredicate));
+        return query.getResultList();
+    }
+
+    private static Predicate getFinalPredicate(JerseyRequestDto jerseyRequestDto, CriteriaBuilder criteriaBuilder, Root<Jersey> jerseyRoot) {
         List<Predicate> predicateList = new ArrayList<>();
         if (!jerseyRequestDto.getSeasons().isEmpty()) {
             predicateList.add(criteriaBuilder.in(jerseyRoot.get("seasonCode").get("seasonCode"))
@@ -82,9 +88,7 @@ public class ProductServiceImpl implements ProductService {
             predicateList.add(criteriaBuilder.in(jerseyRoot.get("size"))
                     .value(jerseyRequestDto.getSize()));
         }
-        Predicate finalPredicate = criteriaBuilder.and(predicateList.toArray(Predicate[]::new));
-        TypedQuery<Jersey> query = em.createQuery(queryJersey.where(finalPredicate));
-        return query.getResultList();
+        return criteriaBuilder.and(predicateList.toArray(Predicate[]::new));
     }
 
     /**
@@ -94,16 +98,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Cacheable(key = "#jerseyRequestDto+#root.methodName", unless = "#result==null")
     public List<JerseyViewDto> getJerseyViewGrouped(JerseyRequestDto jerseyRequestDto) {
-        jerseyRequestDto.setSeasons(jerseyRequestDto.getSeasons().isEmpty() ? null: jerseyRequestDto.getSeasons());
-        jerseyRequestDto.setSize(jerseyRequestDto.getSize().isEmpty() ? null: jerseyRequestDto.getSize());
-        jerseyRequestDto.setTeams(jerseyRequestDto.getTeams().isEmpty() ? null: jerseyRequestDto.getTeams());
-        Sort sortBy = jerseyRequestDto.getSortByOrder().equals("ASC") ? Sort.by(jerseyRequestDto.getSortBy().value)
-                : Sort.by(jerseyRequestDto.getSortBy().value).descending();
+        prepareJerseyRequest(jerseyRequestDto);
+        Sort sortBy = getSortBy(jerseyRequestDto);
         Pageable pageable = PageRequest.of(jerseyRequestDto.getPage(), jerseyRequestDto.getRecords(), sortBy);
         List<Object[]> jerseyViewResultFromDB = jerseyRepository.findJerseyView(jerseyRequestDto, pageable);
         return jerseyViewResultFromDB.stream()
                 .map(JerseyTransformer::toJerseyViewDto)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    private static Sort getSortBy(JerseyRequestDto jerseyRequestDto) {
+        return jerseyRequestDto.getSortByOrder().equals("ASC")
+                ? Sort.by(jerseyRequestDto.getSortBy().value)
+                : Sort.by(jerseyRequestDto.getSortBy().value).descending();
+    }
+
+    private static void prepareJerseyRequest(JerseyRequestDto jerseyRequestDto) {
+        jerseyRequestDto.setSeasons(jerseyRequestDto.getSeasons().isEmpty() ? null : jerseyRequestDto.getSeasons());
+        jerseyRequestDto.setSize(jerseyRequestDto.getSize().isEmpty() ? null : jerseyRequestDto.getSize());
+        jerseyRequestDto.setTeams(jerseyRequestDto.getTeams().isEmpty() ? null : jerseyRequestDto.getTeams());
     }
 }

@@ -3,6 +3,7 @@ package com.jijo.jerseyhouse.controller.impl;
 import com.jijo.jerseyhouse.controller.TeamsControllerInterface;
 import com.jijo.jerseyhouse.dto.JerseyOrderDto;
 import com.jijo.jerseyhouse.dto.JerseyViewDto;
+import com.jijo.jerseyhouse.dto.OrderStatusDto;
 import com.jijo.jerseyhouse.exception.CommonInternalException;
 import com.jijo.jerseyhouse.model.Jersey;
 import com.jijo.jerseyhouse.model.Teams;
@@ -62,5 +63,14 @@ public class TeamsController implements TeamsControllerInterface {
     @Override
     public ResponseEntity<Map<String, String>> postJerseyOrder(JerseyOrderDto JerseyOrderDto, String userId) throws CommonInternalException {
         return new ResponseEntity<>(orderService.orderJersey(JerseyOrderDto, userId), HttpStatus.OK);
+    }
+
+    /**
+     * @param orderId
+     * @return OrderStatus for the order with given orderId.
+     */
+    @Override
+    public ResponseEntity<OrderStatusDto> getOrderStatus(String orderId) throws CommonInternalException {
+        return new ResponseEntity<>(orderService.findOrder(orderId), HttpStatus.OK);
     }
 }
