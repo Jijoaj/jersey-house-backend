@@ -1,5 +1,6 @@
 package com.jijo.jerseyhouse.dto;
 
+import com.jijo.jerseyhouse.model.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,6 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderStatusDto {
-    private Map<String, String> status;
+    private OrderStatus status;
     private String orderID;
 }
