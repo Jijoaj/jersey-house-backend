@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RequestMapping("stock")
 public interface StockControllerInterface {
 
     @PostMapping(value = "update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    ResponseEntity<Map<String, String>> updateStockFromFile(@RequestParam("file") MultipartFile file) throws CommonInternalException;
+    ResponseEntity<Map<String, String>> updateStockFromFile(@RequestParam("file") MultipartFile file) throws CommonInternalException, IOException;
 
 }
