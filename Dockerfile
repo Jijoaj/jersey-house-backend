@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11
+FROM eclipse-temurin:17-jre-jammy
 VOLUME /tmp
 EXPOSE 4444
 ADD target/*.jar app.jar

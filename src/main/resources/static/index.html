@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jersey House</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%86%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="floodlights" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-badge">JH</span>
+    <span class="brand-name">Jersey House</span>
+  </div>
+  <div class="topbar-actions">
+    <button class="ghost-btn" id="openTrackBtn">Track Order</button>
+    <div class="user-chip" id="userChip" title="Your buyer ID, used to place orders">
+      <span class="dot"></span>
+      <input id="userIdInput" type="text" spellcheck="false" />
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Official kits &middot; Every league &middot; Every season</p>
+    <h1>Wear the badge.<br/>Own the moment.</h1>
+    <p class="hero-sub">Browse jerseys from clubs across the world's biggest leagues, check live stock and place your order in seconds.</p>
+    <a href="#browse" class="cta-btn">Start Browsing ↓</a>
+  </div>
+  <div class="pitch-line" aria-hidden="true"></div>
+</section>
+
+<main id="browse" class="content">
+
+  <section class="panel filters-panel">
+    <h2 class="panel-title">Find your jersey</h2>
+    <div class="filters-grid">
+
+      <div class="filter-block">
+        <label class="filter-label">Country</label>
+        <select id="countrySelect" class="select-input">
+          <option value="">All countries</option>
+        </select>
+      </div>
+
+      <div class="filter-block wide">
+        <label class="filter-label">League <span class="hint">(pick one or more)</span></label>
+        <div class="chip-row" id="leagueChips"><span class="placeholder-text">Select a country to see available leagues, or leave blank for all teams.</span></div>
+      </div>
+
+      <div class="filter-block wide">
+        <label class="filter-label">Team <span class="hint">(pick one or more)</span></label>
+        <div class="chip-row" id="teamChips"><span class="placeholder-text">Loading teams…</span></div>
+      </div>
+
+      <div class="filter-block wide">
+        <label class="filter-label">Season</label>
+        <div class="chip-row" id="seasonChips"><span class="placeholder-text">Loading seasons…</span></div>
+      </div>
+
+      <div class="filter-block wide">
+        <label class="filter-label">Size</label>
+        <div class="chip-row" id="sizeChips"></div>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label">Sort by</label>
+        <select id="sortBySelect" class="select-input">
+          <option value="teamName">Team name</option>
+          <option value="season">Season</option>
+        </select>
+      </div>
+
+      <div class="filter-block">
+        <label class="filter-label">Order</label>
+        <select id="sortOrderSelect" class="select-input">
+          <option value="ASC">Ascending</option>
+          <option value="DESC">Descending</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filters-actions">
+      <button class="primary-btn" id="searchBtn">Search Jerseys</button>
+      <button class="text-btn" id="resetBtn">Reset filters</button>
+    </div>
+  </section>
+
+  <section class="results-section">
+    <div class="results-header">
+      <h2 class="panel-title" id="resultsTitle">Jerseys</h2>
+      <div class="pager">
+        <button class="ghost-btn small" id="prevPageBtn">‹ Prev</button>
+        <span id="pageIndicator">Page 1</span>
+        <button class="ghost-btn small" id="nextPageBtn">Next ›</button>
+      </div>
+    </div>
+    <div class="grid" id="resultsGrid"></div>
+    <p class="empty-state" id="emptyState" hidden>No jerseys match your filters yet. Try widening your search.</p>
+  </section>
+
+  <section class="panel admin-panel">
+    <button class="collapse-toggle" id="adminToggle">Store Admin: bulk stock upload ▾</button>
+    <div class="admin-body" id="adminBody" hidden>
+      <p class="muted">Upload a CSV stock file to <code>/stock/update</code>.</p>
+      <div class="admin-row">
+        <input type="file" id="stockFile" accept=".csv" />
+        <button class="primary-btn" id="uploadStockBtn">Upload</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>Jersey House &middot; built for supporters everywhere</p>
+</footer>
+
+<!-- Size detail / order modal -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="detailModal">
+    <button class="modal-close" id="closeDetailModal">&times;</button>
+    <div id="detailModalContent"></div>
+  </div>
+</div>
+
+<!-- Order confirmation modal -->
+<div class="modal-overlay" id="orderModalOverlay" hidden>
+  <div class="modal" id="orderModal">
+    <button class="modal-close" id="closeOrderModal">&times;</button>
+    <div id="orderModalContent"></div>
+  </div>
+</div>
+
+<!-- Track order modal -->
+<div class="modal-overlay" id="trackModalOverlay" hidden>
+  <div class="modal" id="trackModal">
+    <button class="modal-close" id="closeTrackModal">&times;</button>
+    <h3>Track your order</h3>
+    <p class="muted">Enter the order ID you received to check its current status.</p>
+    <div class="admin-row">
+      <input type="text" id="trackOrderInput" placeholder="Order ID (UUID)" />
+      <button class="primary-btn" id="trackOrderBtn">Check status</button>
+    </div>
+    <div id="trackOrderResult"></div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
