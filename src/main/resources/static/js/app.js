@@ -13,7 +13,9 @@
   const state = {
     countries: [],
     leagues: [],
+    allLeagues: [],
     teams: [],
+    allTeamsCount: 0,
     seasons: [],
     selectedCountry: "",
     selectedLeagues: new Set(),
@@ -217,6 +219,10 @@
     try {
       const leagueCodes = Array.from(state.selectedLeagues).map(Number);
       state.teams = await apiPost("/teams/getTeamsByLeagues", leagueCodes);
+      if (leagueCodes.length === 0) {
+        state.allTeamsCount = state.teams.length;
+        updateStats();
+      }
       state.selectedTeams.clear();
       renderChips(
         chipsEl,
@@ -233,6 +239,78 @@
       chipsEl.innerHTML = `<span class="placeholder-text">Could not load teams.</span>`;
       toast(e.message, "error");
     }
+  }
+
+  // ---------- stats strip ----------
+  function updateStats() {
+    el("statLeagues").textContent = state.allLeagues.length || "–";
+    el("statClubs").textContent = state.allTeamsCount || "–";
+    el("statSeasons").textContent = state.seasons.length || "–";
+    el("statCountries").textContent = state.countries.length || "–";
+  }
+
+  // ---------- league showcase ----------
+  async function loadLeagueShowcase() {
+    const grid = el("leagueShowcaseGrid");
+    try {
+      const perCountry = await Promise.all(
+        state.countries.map((c) =>
+          apiGet(`/main/getLeagueByCountry?country=${encodeURIComponent(c.countryName)}`).catch(() => [])
+        )
+      );
+      const byCode = new Map();
+      perCountry.flat().forEach((l) => byCode.set(l.leagueCode, l));
+      state.allLeagues = Array.from(byCode.values()).sort((a, b) => a.leagueName.localeCompare(b.leagueName));
+      updateStats();
+
+      if (state.allLeagues.length === 0) {
+        grid.innerHTML = `<p class="muted">No leagues available yet.</p>`;
+        return;
+      }
+      grid.innerHTML = state.allLeagues
+        .map((l, idx) => {
+          const hue = hashHue(l.leagueName);
+          const bg = `linear-gradient(155deg, hsl(${hue} 55% 16%), hsl(${(hue + 30) % 360} 50% 24%))`;
+          const emblemBg = `linear-gradient(160deg, hsl(${hue} 80% 55%), hsl(${(hue + 30) % 360} 75% 45%))`;
+          return `
+          <button type="button" class="league-card" style="background:${bg}" data-idx="${idx}">
+            <span class="league-emblem" style="background:${emblemBg}">${escapeHtml(initials(l.leagueName))}</span>
+            <span>
+              <span class="league-card-name">${escapeHtml(l.leagueName)}</span>
+              <span class="league-card-cta">Shop kits →</span>
+            </span>
+          </button>`;
+        })
+        .join("");
+      grid.querySelectorAll(".league-card").forEach((btn) =>
+        btn.addEventListener("click", () => selectLeagueFromShowcase(state.allLeagues[Number(btn.dataset.idx)]))
+      );
+    } catch (e) {
+      grid.innerHTML = `<p class="muted">Could not load leagues.</p>`;
+    }
+  }
+
+  async function selectLeagueFromShowcase(league) {
+    state.selectedCountry = "";
+    el("countrySelect").value = "";
+    state.leagues = [league];
+    state.selectedLeagues = new Set([String(league.leagueCode)]);
+    renderChips(
+      el("leagueChips"),
+      state.leagues,
+      state.selectedLeagues,
+      (l) => String(l.leagueCode),
+      (l) => l.leagueName,
+      loadTeamsForLeagues
+    );
+    await loadTeamsForLeagues();
+    // The jersey search filters by team, not league, so select every team in
+    // this league to actually narrow results to it.
+    state.selectedTeams = new Set(state.teams.map((t) => String(t.teamId)));
+    renderChips(el("teamChips"), state.teams, state.selectedTeams, (t) => String(t.teamId), (t) => t.teamName, null);
+    state.page = 0;
+    el("browse").scrollIntoView({ behavior: "smooth" });
+    search();
   }
 
   function teamNameById(teamId) {
@@ -516,6 +594,16 @@
     const userIdInput = el("userIdInput");
     userIdInput.value = getUserId();
     userIdInput.addEventListener("change", () => setUserId(userIdInput.value.trim()));
+
+    el("footerTrackLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      el("trackModalOverlay").hidden = false;
+    });
+    el("footerAdminLink").addEventListener("click", (e) => {
+      e.preventDefault();
+      el("adminBody").hidden = false;
+      el("adminBody").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
   }
 
   async function init() {
@@ -523,6 +611,8 @@
     renderSizeChips();
     try {
       await Promise.all([loadCountries(), loadSeasons(), loadTeamsForLeagues()]);
+      updateStats();
+      loadLeagueShowcase();
     } catch (e) {
       toast("Could not reach the Jersey House API. Is the backend running?", "error");
     }
