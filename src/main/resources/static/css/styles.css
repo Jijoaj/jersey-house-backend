@@ -186,7 +186,17 @@ a { color: inherit; }
   text-align: center;
   overflow: hidden;
 }
-.hero-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 2; }
+.hero-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+  text-align: left;
+}
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -196,7 +206,7 @@ a { color: inherit; }
   margin-bottom: 18px;
 }
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
   line-height: 1.08;
   margin: 0;
   font-weight: 800;
@@ -207,17 +217,89 @@ a { color: inherit; }
   color: transparent;
 }
 .hero-sub {
-  margin: 22px auto 0;
-  max-width: 560px;
+  margin: 22px 0 0;
+  max-width: 480px;
   color: var(--ink-dim);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+.hero-ctas { display: flex; align-items: center; gap: 22px; margin-top: 30px; flex-wrap: wrap; }
+.cta-secondary {
+  font-weight: 700;
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.cta-secondary:hover { color: var(--ink); border-color: var(--ink-dim); }
+
+/* hero visual: a small tilted stack of jersey cards, purely CSS/SVG-generated art */
+.hero-visual {
+  position: relative;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.kit-glow {
+  position: absolute;
+  inset: 10% 15%;
+  background: radial-gradient(circle, rgba(46, 207, 138, 0.28), transparent 65%);
+  filter: blur(10px);
+  z-index: 0;
+}
+.kit-card {
+  position: absolute;
+  width: 150px;
+  height: 190px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  animation: kit-float 6s ease-in-out infinite;
+}
+.kit-num {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 800;
+  font-size: 3.2rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+.kit-1 {
+  background: linear-gradient(155deg, hsl(155 65% 24%), hsl(165 60% 38%));
+  transform: rotate(-9deg) translate(-70px, 10px);
+  z-index: 3;
+  animation-delay: 0s;
+}
+.kit-2 {
+  background: linear-gradient(155deg, hsl(45 75% 30%), hsl(38 80% 45%));
+  transform: rotate(4deg) translate(35px, -30px);
+  z-index: 2;
+  animation-delay: 1.2s;
+}
+.kit-3 {
+  background: linear-gradient(155deg, hsl(352 60% 28%), hsl(340 65% 42%));
+  transform: rotate(13deg) translate(60px, 55px);
+  z-index: 1;
+  animation-delay: 2.4s;
+}
+@keyframes kit-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+
+.stadium-silhouette {
+  display: block;
+  width: 100%;
+  height: 90px;
+  color: rgba(255, 255, 255, 0.05);
+  margin-top: -20px;
 }
 
 /* pitch / turf stripe strip beneath hero, purely decorative */
 .pitch-line {
   height: 90px;
-  margin-top: 50px;
   background:
     repeating-linear-gradient(
       90deg,
@@ -230,6 +312,108 @@ a { color: inherit; }
   mask-image: linear-gradient(180deg, transparent, black 40%, black 60%, transparent);
   opacity: 0.7;
 }
+
+/* ============ Stats strip ============ */
+.stats-strip {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 32px 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+.stat-block {
+  padding: 22px 12px;
+  border-radius: var(--radius-md);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+}
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold-2), var(--emerald));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stat-label { font-size: 0.82rem; color: var(--ink-dim); font-weight: 600; }
+
+/* ============ Generic content sections ============ */
+.section-block {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 70px 32px 10px;
+}
+.section-block.no-top-pad { padding-top: 10px; }
+.section-heading { text-align: center; margin-bottom: 32px; }
+.section-heading h2 { font-size: 1.7rem; font-weight: 800; margin: 0 0 8px; }
+
+/* ============ League showcase ============ */
+.league-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 20px;
+}
+.league-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  text-align: left;
+}
+.league-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35); }
+.league-emblem {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.league-card-name { font-weight: 700; line-height: 1.25; }
+.league-card-cta { display: block; margin-top: 4px; font-size: 0.78rem; color: var(--ink-dim); }
+
+/* ============ Feature cards ============ */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+.feature-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 26px 22px;
+}
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(46, 207, 138, 0.22), rgba(244, 201, 93, 0.18));
+  color: var(--emerald);
+}
+.feature-icon svg { width: 24px; height: 24px; }
+.feature-card h3 { margin: 0 0 8px; font-size: 1rem; }
+.feature-card p { margin: 0; font-size: 0.88rem; line-height: 1.5; }
 
 /* ============ Content layout ============ */
 .content {
@@ -430,10 +614,40 @@ input[type="file"] { color: var(--ink-dim); font-size: 0.85rem; }
 .site-footer {
   position: relative;
   z-index: 1;
-  text-align: center;
-  padding: 30px;
+  padding: 56px 32px 26px;
   color: var(--ink-faint);
   font-size: 0.85rem;
+  border-top: 1px solid var(--glass-border);
+}
+.footer-grid {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 36px;
+}
+.footer-brand .brand { margin-bottom: 12px; }
+.footer-brand p { max-width: 320px; }
+.footer-col h4 {
+  color: var(--ink-dim);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 14px;
+}
+.footer-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-col a {
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+.footer-col a:hover { color: var(--ink); }
+.footer-bottom {
+  text-align: center;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-top: 22px;
   border-top: 1px solid var(--glass-border);
 }
 
@@ -542,6 +756,16 @@ input[type="file"] { color: var(--ink-dim); font-size: 0.85rem; }
 }
 
 /* ============ Responsive ============ */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-inner { order: 2; }
+  .hero-ctas { justify-content: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .hero-visual { order: 1; height: 220px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-brand p { max-width: none; }
+}
+
 @media (max-width: 720px) {
   .filters-grid { grid-template-columns: 1fr; }
   .filter-block.wide { grid-column: span 1; }
@@ -549,4 +773,6 @@ input[type="file"] { color: var(--ink-dim); font-size: 0.85rem; }
   .content { padding: 0 18px 60px; }
   .hero { padding: 60px 20px 40px; }
   .user-chip input { width: 90px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); padding: 0 18px 10px; }
+  .section-block { padding: 50px 18px 10px; }
 }

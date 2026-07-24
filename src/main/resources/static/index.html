@@ -25,13 +25,56 @@
 </header>
 
 <section class="hero">
-  <div class="hero-inner">
-    <p class="eyebrow">Official kits &middot; Every league &middot; Every season</p>
-    <h1>Wear the badge.<br/>Own the moment.</h1>
-    <p class="hero-sub">Browse jerseys from clubs across the world's biggest leagues, check live stock and place your order in seconds.</p>
-    <a href="#browse" class="cta-btn">Start Browsing ↓</a>
+  <div class="hero-grid">
+    <div class="hero-inner">
+      <p class="eyebrow">Official kits &middot; Every league &middot; Every season</p>
+      <h1>Wear the badge.<br/>Own the moment.</h1>
+      <p class="hero-sub">Browse jerseys from clubs across the world's biggest leagues, check live stock and place your order in seconds.</p>
+      <div class="hero-ctas">
+        <a href="#browse" class="cta-btn">Start Browsing ↓</a>
+        <a href="#leagues" class="cta-secondary">Shop by League</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="kit-card kit-1"><span class="kit-num">7</span></div>
+      <div class="kit-card kit-2"><span class="kit-num">10</span></div>
+      <div class="kit-card kit-3"><span class="kit-num">9</span></div>
+      <div class="kit-glow"></div>
+    </div>
   </div>
+  <svg class="stadium-silhouette" viewBox="0 0 1400 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 L0,70 Q40,50 80,68 T160,66 T240,70 T320,64 T400,70 T480,62 T560,70 T640,66 T720,72 T800,64 T880,70 T960,66 T1040,72 T1120,64 T1200,70 T1280,66 T1400,70 L1400,120 Z" fill="currentColor"/>
+  </svg>
   <div class="pitch-line" aria-hidden="true"></div>
+</section>
+
+<section class="stats-strip" id="statsStrip">
+  <div class="stat-block">
+    <span class="stat-value" id="statLeagues">–</span>
+    <span class="stat-label">Leagues</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-value" id="statClubs">–</span>
+    <span class="stat-label">Clubs</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-value" id="statSeasons">–</span>
+    <span class="stat-label">Seasons of kits</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-value" id="statCountries">–</span>
+    <span class="stat-label">Countries served</span>
+  </div>
+</section>
+
+<section class="section-block" id="leagues">
+  <div class="section-heading">
+    <h2>Shop by League</h2>
+    <p class="muted">Jump straight to a competition and see every club's kit.</p>
+  </div>
+  <div class="league-showcase" id="leagueShowcaseGrid">
+    <p class="muted">Loading leagues…</p>
+  </div>
 </section>
 
 <main id="browse" class="content">
@@ -103,6 +146,42 @@
     <p class="empty-state" id="emptyState" hidden>No jerseys match your filters yet. Try widening your search.</p>
   </section>
 
+  <section class="section-block no-top-pad" id="why">
+    <div class="section-heading">
+      <h2>Why Jersey House</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8 3l4 2 4-2 3 4-2 2v11a1 1 0 01-1 1H6a1 1 0 01-1-1V9L3 7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 3.5c0 1.5 1.3 2.5 3 2.5s3-1 3-2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <h3>Authentic club kits</h3>
+        <p class="muted">Every jersey is sourced from official club catalogues, season by season.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M17 10h2.5l2 3v5H17" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="7.5" cy="18.5" r="1.6" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="18.5" r="1.6" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <h3>Fast order processing</h3>
+        <p class="muted">Orders are queued and confirmed automatically the moment you check out.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 17l4-5 4 3 5-7 5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <h3>Live stock tracking</h3>
+        <p class="muted">See exactly how many of each size are available before you order.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18" stroke="currentColor" stroke-width="1.6"/></svg>
+        </span>
+        <h3>Every major league</h3>
+        <p class="muted">From the Premier League to the ISL, browse clubs across the world.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="panel admin-panel">
     <button class="collapse-toggle" id="adminToggle">Store Admin: bulk stock upload ▾</button>
     <div class="admin-body" id="adminBody" hidden>
@@ -116,7 +195,27 @@
 </main>
 
 <footer class="site-footer">
-  <p>Jersey House &middot; built for supporters everywhere</p>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-badge">JH</span>
+        <span class="brand-name">Jersey House</span>
+      </div>
+      <p class="muted">Official kits for supporters everywhere, from every league and every season.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Browse</h4>
+      <a href="#leagues">Shop by League</a>
+      <a href="#browse">Find a Jersey</a>
+      <a href="#" id="footerTrackLink">Track an Order</a>
+    </div>
+    <div class="footer-col">
+      <h4>Store</h4>
+      <a href="#why">Why Jersey House</a>
+      <a href="#" id="footerAdminLink">Store Admin</a>
+    </div>
+  </div>
+  <p class="footer-bottom muted">Jersey House &middot; built for supporters everywhere</p>
 </footer>
 
 <!-- Size detail / order modal -->
