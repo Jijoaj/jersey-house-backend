@@ -105,16 +105,21 @@
     const hue = hashHue(teamName || "team");
     const bg = `linear-gradient(155deg, hsl(${hue} 70% 22%), hsl(${(hue + 40) % 360} 65% 34%))`;
     const glyphBg = `linear-gradient(160deg, hsl(${hue} 85% 55%), hsl(${(hue + 40) % 360} 80% 45%))`;
-    const fallback = `
-      <div class="jersey-glyph" style="background:${glyphBg}">${escapeHtml(initials(teamName))}</div>
-    `;
-    if (imageUrl && /^https?:\/\//.test(imageUrl)) {
-      return `<div class="card-art" style="background:${bg}">
-        <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(teamName)} jersey" loading="lazy"
-             onerror="this.replaceWith(Object.assign(document.createElement('div'), {innerHTML: \`${fallback.replace(/`/g, "\\`")}\`}).firstElementChild)" />
-      </div>`;
-    }
-    return `<div class="card-art" style="background:${bg}">${fallback}</div>`;
+    const glyphHtml = `<div class="jersey-glyph" style="background:${glyphBg}">${escapeHtml(initials(teamName))}</div>`;
+    const imgHtml =
+      imageUrl && /^https?:\/\//.test(imageUrl)
+        ? `<img class="card-art-img" src="${escapeHtml(imageUrl)}" alt="${escapeHtml(teamName)} jersey" loading="lazy" />`
+        : "";
+    // The glyph always renders underneath; a real photo (if any) layers on top and
+    // is removed on load failure via an attached listener (see wireCardArtFallbacks),
+    // rather than an inline onerror string, which is fragile to escape correctly.
+    return `<div class="card-art" style="background:${bg}">${glyphHtml}${imgHtml}</div>`;
+  }
+
+  function wireCardArtFallbacks(container) {
+    container.querySelectorAll(".card-art-img").forEach((img) => {
+      img.addEventListener("error", () => img.remove(), { once: true });
+    });
   }
 
   // ---------- rendering: chips ----------
@@ -297,6 +302,7 @@
       })
       .join("");
 
+    wireCardArtFallbacks(grid);
     grid.querySelectorAll('[data-action="details"]').forEach((btn) =>
       btn.addEventListener("click", () => openSizeDetail(state.results[Number(btn.dataset.idx)]))
     );

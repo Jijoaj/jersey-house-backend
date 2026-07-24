@@ -1,6 +1,6 @@
 #cloud build for hello app
 steps:
-  - name: maven:3.6.0-jdk-11
+  - name: maven:3.9-eclipse-temurin-17
     id: 'Build'
     entrypoint: mvn
     args: ['package','-Dmaven.test.skip=true','-DPROJECT_ID=${PROJECT_ID}']
